@@ -31,5 +31,7 @@ public class MultidayPolicy implements PricingPolicy{
     }
 
     public ArrayList<Float> getPolicy() {
+        return discountPolicyTable;
+    }
     }
 }
