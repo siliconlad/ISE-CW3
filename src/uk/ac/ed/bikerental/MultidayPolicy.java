@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 
 public class MultidayPolicy implements PricingPolicy{
-    private ArrayList<Float> discountPolicyTable;
+    private ArrayList<BigDecimal> discountPolicyTable;
     private Hashtable<BikeType, BigDecimal> pricingTable;
 
     public MultidayPolicy() {
@@ -27,16 +27,16 @@ public class MultidayPolicy implements PricingPolicy{
             priceOfBike = priceOfBike.multiply(duration);
             totalPrice = totalPrice.add(priceOfBike);
         }
-        float discount = calculateDiscount(duration);
+        BigDecimal discount = calculateDiscount(duration);
         totalPrice = totalPrice.multiply(discount);
         return totalPrice;
     }
 
-    public float calculateDiscount(DateRange duration) {
+    public BigDecimal calculateDiscount(DateRange duration) {
         return discountPolicyTable.get(duration);
     }
 
-    public void updatePolicy(int startDays, int endDays, float discount) {
+    public void updatePolicy(int startDays, int endDays, BigDecimal discount) {
         for (int i = startDays-1; i < endDays; i++) {
             if (i < discountPolicyTable.size()) {
                 discountPolicyTable.set(i, discount);
@@ -46,7 +46,7 @@ public class MultidayPolicy implements PricingPolicy{
         }
     }
 
-    public ArrayList<Float> getPolicy() {
+    public ArrayList<BigDecimal> getPolicy() {
         return discountPolicyTable;
     }
 
