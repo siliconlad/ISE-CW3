@@ -23,7 +23,7 @@ public class MultidayPolicy implements PricingPolicy{
     }
 
     public float calculateDiscount(DateRange duration) {
-
+        return discountPolicyTable.get(duration);
     }
 
     public void updatePolicy(int startDays, int endDays, float discount) {
