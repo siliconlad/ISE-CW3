@@ -19,7 +19,17 @@ public class MultidayPolicy implements PricingPolicy{
     }
 
     public BigDecimal calculatePrice(Collection<Bike> bikes, DateRange duration) {
-
+        BigDecimal totalPrice = new BigDecimal(0);
+        totalPrice = totalPrice.setScale(2, BigDecimal.ROUND_HALF_UP);
+        for (Bike bike: bikes) {
+            BikeType typeOfBike = bike.getBikeType();
+            BigDecimal priceOfBike = getPricing(typeOfBike);
+            priceOfBike = priceOfBike.multiply(duration);
+            totalPrice = totalPrice.add(priceOfBike);
+        }
+        float discount = calculateDiscount(duration);
+        totalPrice = totalPrice.multiply(discount);
+        return totalPrice;
     }
 
     public float calculateDiscount(DateRange duration) {
