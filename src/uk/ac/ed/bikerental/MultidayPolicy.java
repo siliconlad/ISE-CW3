@@ -38,7 +38,11 @@ public class MultidayPolicy implements PricingPolicy{
         return pricingTable;
     }
 
-    public Hashtable<BikeType, BigDecimal> getPricing() {
-        return pricingTable;
+    public Hashtable<BikeType, BigDecimal> getPricing(BikeType bikeType) {
+        if (pricingTable.containsKey(bikeType)) {
+            return pricingTable.get(bikeType);
+        } else {
+            return null;
+        }
     }
 }
