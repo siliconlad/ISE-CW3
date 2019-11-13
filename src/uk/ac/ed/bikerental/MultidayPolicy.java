@@ -27,7 +27,13 @@ public class MultidayPolicy implements PricingPolicy{
     }
 
     public void updatePolicy(int startDays, int endDays, float discount) {
-
+        for (int i = startDays-1; i < endDays; i++) {
+            if (i < discountPolicyTable.size()) {
+                discountPolicyTable.set(i, discount);
+            } else {
+                discountPolicyTable.add(discount);
+            }
+        }
     }
 
     public ArrayList<Float> getPolicy() {
