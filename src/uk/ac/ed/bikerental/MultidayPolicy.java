@@ -9,8 +9,8 @@ public class MultidayPolicy implements PricingPolicy{
     private ArrayList<BigDecimal> discountPolicyTable;
     private Hashtable<BikeType, BigDecimal> pricingTable;
 
-    public MultidayPolicy() {
-        discountPolicyTable = new ArrayList();
+    public MultidayPolicy(ArrayList<BigDecimal> discountPolicy) {
+        discountPolicyTable = discountPolicy;
         pricingTable = new Hashtable();
     }
 
@@ -34,16 +34,6 @@ public class MultidayPolicy implements PricingPolicy{
 
     public BigDecimal calculateDiscount(DateRange duration) {
         return discountPolicyTable.get(duration);
-    }
-
-    public void updatePolicy(int startDays, int endDays, BigDecimal discount) {
-        for (int i = startDays-1; i < endDays; i++) {
-            if (i < discountPolicyTable.size()) {
-                discountPolicyTable.set(i, discount);
-            } else {
-                discountPolicyTable.add(discount);
-            }
-        }
     }
 
     public ArrayList<BigDecimal> getPolicy() {
