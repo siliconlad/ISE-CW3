@@ -23,10 +23,20 @@ public class DateRange {
         this.end = end;
     }
 
+    /**
+     * Returns the first date of the date range.
+     *
+     * @return the first date of the date range
+     */
     public LocalDate getStart() {
         return this.start;
     }
 
+    /**
+     * Returns the last date of the date range.
+     *
+     * @return the last date of the date range
+     */
     public LocalDate getEnd() {
         return this.end;
     }
