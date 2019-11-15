@@ -32,7 +32,7 @@ public class MultidayPolicy implements PricingPolicy{
         return totalPrice;
     }
 
-    public BigDecimal calculateDiscount(DateRange duration) {
+    private BigDecimal calculateDiscount(DateRange duration) {
         int length = discountPolicyTable.size();
         if (duration > length) {
             return discountPolicyTable.get(length - 1);
@@ -40,19 +40,23 @@ public class MultidayPolicy implements PricingPolicy{
         return discountPolicyTable.get(duration - 1);
     }
 
+    private Hashtable<BikeType, BigDecimal> getPricing(BikeType bikeType) {
+        if (pricingTable.containsKey(bikeType)) {
+            return pricingTable.get(bikeType);
+        } else {
+            return null;
+        }
+    }
+
+    //-----------------------------
+    // For Unit Testing Purposes
+    //-----------------------------
+
     public ArrayList<BigDecimal> getPolicy() {
         return discountPolicyTable;
     }
 
     public Hashtable<BikeType, BigDecimal> getPricingTable() {
         return pricingTable;
-    }
-
-    public Hashtable<BikeType, BigDecimal> getPricing(BikeType bikeType) {
-        if (pricingTable.containsKey(bikeType)) {
-            return pricingTable.get(bikeType);
-        } else {
-            return null;
-        }
     }
 }
