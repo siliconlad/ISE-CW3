@@ -7,16 +7,16 @@ import java.util.function.BooleanSupplier;
 
 public class DateRange {
     private LocalDate start, end;
-    
+
     public DateRange(LocalDate start, LocalDate end) {
         this.start = start;
         this.end = end;
     }
-    
+
     public LocalDate getStart() {
         return this.start;
     }
-    
+
     public LocalDate getEnd() {
         return this.end;
     }
@@ -30,9 +30,18 @@ public class DateRange {
     }
 
     public Boolean overlaps(DateRange other) {
-        // TODO: implement date range intersection checking
-        assert false;
-        return null;
+        otherStart other.getEnd()
+        otherEnd = other.getStart()
+
+        if (this.start.compareTo(otherEnd)) {
+            // if this.start is greater than otherEnd
+            return false
+        } else if (otherStart.compareTo(this.end)) {
+            // if otherStart is greater than this.end
+            return false
+        }
+
+        return true;
     }
 
     @Override
@@ -53,6 +62,6 @@ public class DateRange {
         DateRange other = (DateRange) obj;
         return Objects.equals(end, other.end) && Objects.equals(start, other.start);
     }
-    
+
     // You can add your own methods here
 }
