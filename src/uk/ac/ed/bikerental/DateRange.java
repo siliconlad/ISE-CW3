@@ -5,6 +5,10 @@ import java.time.temporal.ChronoUnit;
 import java.util.Objects;
 import java.util.function.BooleanSupplier;
 
+/**
+ * A date range marked by a starting date and an ending date and assumes
+ * all dates in between (inclusive).
+ */
 public class DateRange {
     private LocalDate start, end;
 
