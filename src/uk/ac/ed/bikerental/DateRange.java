@@ -12,6 +12,12 @@ import java.util.function.BooleanSupplier;
 public class DateRange {
     private LocalDate start, end;
 
+    /**
+     * Constructs a date range from a start and end date.
+     *
+     * @param start the start date
+     * @param end   the end date
+     */
     public DateRange(LocalDate start, LocalDate end) {
         this.start = start;
         this.end = end;
