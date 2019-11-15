@@ -35,7 +35,9 @@ public class MultidayPolicy implements PricingPolicy{
 
     private BigDecimal calculateDiscount(DateRange duration) {
         int length = discountPolicyTable.size();
-        if (duration > length) {
+        if (length == 0) {
+            return new BigDecimal(0);
+        } else if (duration > length) {
             return discountPolicyTable.get(length - 1);
         }
         return discountPolicyTable.get(duration - 1);
