@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.NoSuchElementException;
 
 public class MultidayPolicy implements PricingPolicy{
     private ArrayList<BigDecimal> discountPolicyTable;
@@ -41,11 +42,10 @@ public class MultidayPolicy implements PricingPolicy{
     }
 
     private Hashtable<BikeType, BigDecimal> getPricing(BikeType bikeType) {
-        if (pricingTable.containsKey(bikeType)) {
-            return pricingTable.get(bikeType);
-        } else {
-            return null;
+        if (!pricingTable.containsKey(bikeType)) {
+            throw new NoSuchElementException("Requested price for provided BikeType does not exist.");
         }
+        return pricingTable.get(bikeType);
     }
 
     //-----------------------------
