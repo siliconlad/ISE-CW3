@@ -14,6 +14,14 @@ public class Location {
      */
     private String address;
 
+    /**
+     * Constructs a location from the given postcode and a street
+     * address. The postcode must be at least 6 characters long otherwise an
+     * <code>AssertionError</code> is thrown.
+     *
+     * @param postcode the postcode of the location
+     * @param address the street address of the location
+     */
     public Location(String postcode, String address) {
         assert postcode.length() >= 6;
         this.postcode = postcode;
