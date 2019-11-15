@@ -31,10 +31,20 @@ public class Location {
         return false;
     }
 
+    /**
+     * Returns the postcode of the location.
+     *
+     * @return the postcode of the location
+     */
     public String getPostcode() {
         return postcode;
     }
 
+    /**
+     * Returns the street address of the location.
+     *
+     * @return the street address of the location
+     */
     public String getAddress() {
         return address;
     }
