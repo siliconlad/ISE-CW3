@@ -1,5 +1,8 @@
 package uk.ac.ed.bikerental;
 
+/**
+ * A location specified by a postcode and a street address.
+ */
 public class Location {
     private String postcode;
     private String address;
