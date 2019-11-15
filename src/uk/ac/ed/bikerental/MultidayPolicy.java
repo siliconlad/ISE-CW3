@@ -28,12 +28,12 @@ public class MultidayPolicy implements PricingPolicy{
             priceOfBike = priceOfBike.multiply(duration);
             totalPrice = totalPrice.add(priceOfBike);
         }
-        BigDecimal discount = calculateDiscount(duration);
+        BigDecimal discount = getDiscount(duration);
         totalPrice = totalPrice.multiply(discount);
         return totalPrice;
     }
 
-    private BigDecimal calculateDiscount(DateRange duration) {
+    private BigDecimal getDiscount(DateRange duration) {
         int length = discountPolicyTable.size();
         if (length == 0) {
             return new BigDecimal(0);
