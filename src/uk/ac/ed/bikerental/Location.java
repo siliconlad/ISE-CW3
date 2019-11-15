@@ -28,6 +28,17 @@ public class Location {
         this.address = address;
     }
 
+    /**
+     * Returns true if the first two characters of the postcode of the provided
+     * location match the first two characters of the postcode of this
+     * <code>Location</code>.
+     *
+     * @param other the location to compare against this <code>Location</code>
+     * @return      true if the first two characters of the postcode of the
+     *              provided location match the first two characters of the
+     *              postcode of this
+     <code>Location</code>
+     */
     public boolean isNearTo(Location other) {
         String otherPostCode = other.getPostcode();
         String otherSub = otherPostCode.substring(0,2);
