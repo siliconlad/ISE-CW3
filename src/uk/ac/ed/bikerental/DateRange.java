@@ -29,6 +29,15 @@ public class DateRange {
         return ChronoUnit.DAYS.between(this.getStart(), this.getEnd());
     }
 
+    /**
+     * Compares a date range with the date range in this object to see if the
+     * two date ranges overlap.
+     *
+     * @param other The other <code>DateRange</code object to compare this
+     *              <code>DateRange</code> object to.
+     * @return      <code>true</code> if the two <code>DateRange</code> objects
+     *              overlap. <code>false</code> otherwise
+     */
     public Boolean overlaps(DateRange other) {
         LocalDate otherStart = other.getEnd();
         LocalDate otherEnd = other.getStart();
