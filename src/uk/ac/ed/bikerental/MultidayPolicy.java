@@ -11,12 +11,12 @@ public class MultidayPolicy implements PricingPolicy{
     private Hashtable<BikeType, BigDecimal> pricingTable;
 
     public MultidayPolicy(ArrayList<BigDecimal> discountPolicy) {
-        discountPolicyTable = discountPolicy;
-        pricingTable = new Hashtable();
+        this.discountPolicyTable = discountPolicy;
+        this.pricingTable = new Hashtable();
     }
 
     public void setDailyRentalPrice(BikeType bikeType, BigDecimal dailyPrice) {
-        pricingTable.put(bikeType, dailyPrice);
+        this.pricingTable.put(bikeType, dailyPrice);
     }
 
     public BigDecimal calculatePrice(Collection<Bike> bikes, DateRange duration) {
@@ -34,20 +34,20 @@ public class MultidayPolicy implements PricingPolicy{
     }
 
     private BigDecimal getDiscount(DateRange duration) {
-        int length = discountPolicyTable.size();
+        int length = this.discountPolicyTable.size();
         if (length == 0) {
             return new BigDecimal(0);
         } else if (duration > length) {
-            return discountPolicyTable.get(length - 1);
+            return this.discountPolicyTable.get(length - 1);
         }
-        return discountPolicyTable.get(duration - 1);
+        return this.discountPolicyTable.get(duration - 1);
     }
 
     private Hashtable<BikeType, BigDecimal> getPricing(BikeType bikeType) {
-        if (!pricingTable.containsKey(bikeType)) {
+        if (!this.pricingTable.containsKey(bikeType)) {
             throw new NoSuchElementException("Requested price for provided BikeType does not exist.");
         }
-        return pricingTable.get(bikeType);
+        return this.pricingTable.get(bikeType);
     }
 
     //-----------------------------
@@ -55,10 +55,10 @@ public class MultidayPolicy implements PricingPolicy{
     //-----------------------------
 
     public ArrayList<BigDecimal> getPolicy() {
-        return discountPolicyTable;
+        return this.discountPolicyTable;
     }
 
     public Hashtable<BikeType, BigDecimal> getPricingTable() {
-        return pricingTable;
+        return this.pricingTable;
     }
 }
