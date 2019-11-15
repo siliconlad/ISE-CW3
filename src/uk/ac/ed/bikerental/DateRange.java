@@ -41,10 +41,20 @@ public class DateRange {
         return this.end;
     }
 
+    /**
+     * Returns the number of complete years in the date range.
+     *
+     * @return the number of complete years in the date range
+     */
     public long toYears() {
         return ChronoUnit.YEARS.between(this.getStart(), this.getEnd());
     }
 
+    /**
+     * Returns the number of complete days in the date range.
+     *
+     * @return the number of complete days in the date range
+     */
     public long toDays() {
         return ChronoUnit.DAYS.between(this.getStart(), this.getEnd());
     }
