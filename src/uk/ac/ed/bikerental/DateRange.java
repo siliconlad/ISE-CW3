@@ -30,13 +30,14 @@ public class DateRange {
     }
 
     /**
-     * Compares a date range with the date range in this object to see if the
-     * two date ranges overlap.
+     * Returns <code>True</code> if the date range stored in this
+     * <code>DateRange</code> overlaps with the date range in the provided
+     * <code>DateRange</code>.
      *
-     * @param other The other <code>DateRange</code> object to compare this
-     *              <code>DateRange</code> object to.
-     * @return      <code>true</code> if the two <code>DateRange</code> objects
-     *              overlap. <code>false</code> otherwise
+     * @param other the <code>DateRange</code> object to compare date ranges
+     *              with.
+     * @return      <code>true</code> if the date ranges in the two objects
+     *              overlap. <code>false</code> otherwise.
      */
     public Boolean overlaps(DateRange other) {
         LocalDate otherStart = other.getEnd();
