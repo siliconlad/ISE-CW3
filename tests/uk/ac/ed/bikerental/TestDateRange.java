@@ -32,17 +32,42 @@ class TestDateRange {
         assertEquals(3, this.dateRange3.toYears());
     }
 
+
+    // Tests for toDays()
+    
+    @Test
+    void testToDays3() {
+        assertEquals(3, dateRange1.toDays());
+    }
+
+    @Test
+    void testToDays1099() {
+        assertEquals(1099, dateRange3.toDays());
+    }
+
+
+    // Tests for overlaps()
     @Test
     void testOverlapsTrue() {
-        // TODO: check we can see when two date ranges overlap
-        fail();
+        assertTrue(this.dateRange1.overlaps(this.dateRange2));
     }
 
     @Test
     void testOverlapsFalse() {
-        // TODO: check we can see when two date ranges  don't overlap
-        fail();
+        assertFalse(this.dateRange1.overlaps(this.dateRange3));
     }
 
-    // TODO: put some of your own unit tests here
+    // Tests of equality
+    @Test
+    void testEqualsTrue() {
+        assertEquals(this.dateRange1, this.dateRange1);
+    }
+
+    @Test
+    void testEqualsFalse() {
+        assertNotEquals(this.dateRange1, this.dateRange2);
+    }
+
+
+    // TODO: Possibly test hashCode()?
 }
