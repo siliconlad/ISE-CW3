@@ -14,7 +14,7 @@ class TestLocation {
 
     // Testing positive isNearTo scenario
     @Test
-    public void similarPostcodesShouldBeNear() {
+    public void testIsNearToTrue() {
         postcode = "SW1A2AA";
 
         String otherAddress = "Palace of Westminster";
@@ -28,7 +28,7 @@ class TestLocation {
 
     // Testing negative isNearTo scenario
     @Test
-    public void diffPostcodesShouldNotBeNear() {
+    public void testIsNearToFalse() {
         postcode = "SW1A2AA";
 
         String otherAddress = "Scottish Parliament Building";
