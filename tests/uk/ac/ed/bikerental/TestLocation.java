@@ -12,17 +12,6 @@ class TestLocation {
         address = "10 Downing Street";
     }
 
-
-    // Testing storage of address/post-code in the class
-    @Test
-    public void detailsShouldBeStored() {
-        postcode = "SW1A2AA";
-        Location loc = new Location(postcode, address);
-
-        assertEquals(address, loc.getAddress());
-        assertEquals(postcode, loc.getPostcode());
-    }
-
     // Testing positive isNearTo scenario
     @Test
     public void similarPostcodesShouldBeNear() {
