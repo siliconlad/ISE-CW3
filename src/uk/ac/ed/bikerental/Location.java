@@ -44,7 +44,7 @@ public class Location {
         String otherSub = otherPostCode.substring(0,2);
         String thisSub = this.postcode.substring(0,2);
 
-        if (thisSub.startsWith(otherSub)) {
+        if (thisSub.equals(otherSub)) {
             return true;
         }
         return false;
