@@ -23,14 +23,6 @@ class TestLocation {
         assertEquals(postcode, loc.getPostcode());
     }
 
-    // Testing input validation for postcodes
-    @Test 
-    public void shortPostcodesShouldFail() {
-        postcode = "SW1A";
-
-        assertThrows(AssertionError.class, () -> new Location(postcode, address));
-    }
-
     // Testing positive isNearTo scenario
     @Test
     public void similarPostcodesShouldBeNear() {
@@ -41,17 +33,6 @@ class TestLocation {
 
         Location loc1 = new Location(postcode, address);
         Location loc2 = new Location(otherPostcode, otherAddress);
-
-        assertTrue(loc1.isNearTo(loc2));
-    }
-
-    // Testing case sensitivity of postcode checks
-    @Test
-    public void checksShouldNotBeCaseSensitive() {
-        postcode = "SW1A2AA";
-
-        Location loc1 = new Location(postcode, address);
-        Location loc2 = new Location(postcode.toLowerCase(), address);
 
         assertTrue(loc1.isNearTo(loc2));
     }
