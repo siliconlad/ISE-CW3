@@ -72,8 +72,8 @@ public class DateRange {
      *              overlap. <code>false</code> otherwise.
      */
     public Boolean overlaps(DateRange other) {
-        LocalDate otherStart = other.getEnd();
-        LocalDate otherEnd = other.getStart();
+        LocalDate otherStart = other.getStart();
+        LocalDate otherEnd = other.getEnd();
 
         if (this.start.compareTo(otherEnd) > 0) {
             // if this.start is greater than otherEnd
