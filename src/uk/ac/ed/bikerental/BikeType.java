@@ -7,9 +7,10 @@ public class BikeType {
     String name;
     BigDecimal replacementValue;
 
-    public void BikeType(String name, BigDecimal replacementValue) {
+    public void BikeType(String name, BigDecimal replacementValue, BikeTypeList bikeTypeList) {
         this.name = name;
         this.replacementValue = replacementValue;
+        bikeTypeList.addType(this);
     }
 
     public BigDecimal getReplacementValue() {
