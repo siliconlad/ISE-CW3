@@ -1,22 +1,26 @@
 package uk.ac.ed.bikerental;
 
-import java.util.HashSet;
+import java.util.HashMap;
 
 public class BikeTypeList {
-    HashSet<BikeType> bikeTypeList;
+    HashMap<String, BikeType> bikeTypeList;
 
     public void BikeTypeList() {
-        this.bikeTypeList = new HashSet<BikeType>();
+        this.bikeTypeList = new HashSet<String, BikeType>();
     }
 
     public void addType(BikeType newType) {
         // Check for invalid states
-        assert !this.bikeTypeList.contains(newType);
+        assert !this.bikeTypeList.containsKey(newType.getName());
 
-        this.bikeTypeList.add(newType);
+        this.bikeTypeList.put(newType.getName(), newType);
     }
 
     public Boolean contains(BikeType bikeType) {
-        return this.bikeTypeList.contains(bikeType);
+        return this.bikeTypeList.containsValue(bikeType);
+    }
+
+    public Boolean contains(String name) {
+        return this.bikeTypeList.containsKey(name);
     }
 }
