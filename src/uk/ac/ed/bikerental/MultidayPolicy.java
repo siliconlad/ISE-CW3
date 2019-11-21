@@ -12,7 +12,7 @@ public class MultidayPolicy implements PricingPolicy{
 
     public MultidayPolicy(ArrayList<BigDecimal> discountPolicy) {
         this.discountPolicyTable = discountPolicy;
-        this.pricingTable = new Hashtable();
+        this.pricingTable = new Hashtable<BikeType, BigDecimal>();
     }
 
     @Override
