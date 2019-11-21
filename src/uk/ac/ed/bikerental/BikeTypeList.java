@@ -1,12 +1,12 @@
 package uk.ac.ed.bikerental;
 
-import java.util.HashMap;
+import java.util.Hashtable;
 
 public class BikeTypeList {
-    HashMap<String, BikeType> bikeTypeList;
+    Hashtable<String, BikeType> bikeTypeList;
 
     public void BikeTypeList() {
-        this.bikeTypeList = new HashSet<String, BikeType>();
+        this.bikeTypeList = new Hashtable<String, BikeType>();
     }
 
     public void addType(BikeType newType) {
