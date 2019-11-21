@@ -15,10 +15,12 @@ public class MultidayPolicy implements PricingPolicy{
         this.pricingTable = new Hashtable();
     }
 
+    @Override
     public void setDailyRentalPrice(BikeType bikeType, BigDecimal dailyPrice) {
         this.pricingTable.put(bikeType, dailyPrice);
     }
 
+    @Override
     public BigDecimal calculatePrice(Collection<Bike> bikes, DateRange duration) {
         BigDecimal totalPrice = new BigDecimal(0);
         totalPrice = totalPrice.setScale(2, BigDecimal.ROUND_HALF_UP);
