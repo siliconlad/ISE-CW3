@@ -15,12 +15,11 @@ public class Booking {
     private BigDecimal deposit;
     private BigDecimal totalPrice;
 
-    private String deliveryInformation;
-    private String returnInformation;
+    private Location deliveryAddress;
     private BookingStatus bookingStatus;
 
 
-    public Booking(quote, collectionMethod, deliveryInformation, returnInformation) {
+    public Booking(Quote quote, CollectionMethod collectionMethod, Location deliveryAddress) {
         this.bikes = new ArrayList<Bike>(quote.getBikes());
         this.provider = quote.getProvider();
         this.range = quote.getDateRange();
@@ -28,8 +27,7 @@ public class Booking {
         this.totalPrice = quote.getTotalPrice();
         this.collectionMethod = collectionMethod;
 
-        this.deliveryInformation = deliveryInformation;
-        this.returnInformation = returnInformation;
+        this.deliveryAddress = deliveryAddress;
 
         this.bookingStatus = BookingStatus.PAID;
     }
