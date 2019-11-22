@@ -1,7 +1,7 @@
 package uk.ac.ed.bikerental;
 
 import java.util.Hashtable;
-
+import java.util.Collection;
 
 /*
  * The singleton implementation was adapted from the Wikipedia article on the
@@ -28,6 +28,10 @@ public final class BikeTypeList {
 
     public Boolean contains(String name) {
         return this.bikeTypeList.containsKey(name);
+    }
+
+    public Collection<BikeType> getBikeTypeList() {
+        return this.bikeTypeList.values();
     }
 
     public static BikeTypeList getInstance() {
