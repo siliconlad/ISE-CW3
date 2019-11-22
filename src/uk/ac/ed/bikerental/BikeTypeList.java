@@ -7,7 +7,7 @@ import java.util.Hashtable;
  * The singleton implementation was adapted from the Wikipedia article on the
  * singleton design pattern. (https://en.wikipedia.org/wiki/Singleton_pattern)
  */
-public class BikeTypeList {
+public final class BikeTypeList {
     private static final BikeTypeList INSTANCE = new BikeTypeList();
     private Hashtable<String, BikeType> bikeTypeList;
 
