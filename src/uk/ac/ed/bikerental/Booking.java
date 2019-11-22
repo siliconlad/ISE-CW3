@@ -39,6 +39,11 @@ public class Booking {
         this.bookingStatus = newStatus;
     }
 
+
+    public boolean containsBike(Bike bike) {
+        return bikes.contains(bike);
+    }
+
     
     public Collection<Bike> getBikes() {
         return this.bikes;
