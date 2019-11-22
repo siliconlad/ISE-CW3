@@ -3,7 +3,7 @@ package uk.ac.ed.bikerental;
 import java.util.Hashtable;
 
 public class BikeTypeList {
-    Hashtable<String, BikeType> bikeTypeList;
+    private Hashtable<String, BikeType> bikeTypeList;
 
     public void BikeTypeList() {
         this.bikeTypeList = new Hashtable<String, BikeType>();
