@@ -19,6 +19,14 @@ public class Bike {
         return this.bikeType;
     }
 
+    public BigDecimal getDailyRentalPrice() {
+        return this.dailyRentalPrice;
+    }
+
+    public Provider getProvider() {
+        return this.provider;
+    }
+
     public void addProvider(Provider provider) {
         // Check for invalid state
         assert this.provider == null;
