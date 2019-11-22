@@ -20,7 +20,7 @@ public class Booking {
 
 
     public Booking(quote, collectionMethod, deliveryInformation, returnInformation) {
-        this.bikes = quote.getBikes();
+        this.bikes = new ArrayList<Bike>(quote.getBikes());
         this.range = quote.getDateRange();
         this.deposit = quote.getDeposit();
         this.totalPrice = quote.getTotalPrice();
