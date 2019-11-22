@@ -9,6 +9,7 @@ import java.util.Collection;
 public class Booking {
     private ArrayList<Bike> bikes;
 
+    private Provider provider;
     private DateRange dateRange;
     private CollectionMethod collectionMethod;
     private BigDecimal deposit;
@@ -21,6 +22,7 @@ public class Booking {
 
     public Booking(quote, collectionMethod, deliveryInformation, returnInformation) {
         this.bikes = new ArrayList<Bike>(quote.getBikes());
+        this.provider = quote.getProvider();
         this.range = quote.getDateRange();
         this.deposit = quote.getDeposit();
         this.totalPrice = quote.getTotalPrice();
