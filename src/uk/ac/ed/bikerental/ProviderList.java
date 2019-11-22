@@ -19,6 +19,10 @@ public final class ProviderList {
         Location queryLocation = query.getLocation();
 
         for (Provider provider : providerList) {
+            if (queryLocation.isNearTo(provider.getLocation())) {
+                Quote quote = provider.createQuote(query);
+                quotes.add(quote);
+            }
         }
 
         return quotes;
