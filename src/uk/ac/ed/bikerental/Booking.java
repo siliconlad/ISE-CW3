@@ -35,8 +35,30 @@ public class Booking {
     }
 
 
+    public void setBikeStatuses(BikeStatus newBikeStatus) {
+        for (Bike b: this.bikes) {
+            b.updateStatus(newBikeStatus);
+        }
+    }
+
+
     public void setStatus(BookingStatus newStatus) {
         this.bookingStatus = newStatus;
+
+        BikeStatus newBikeStatus;
+        switch (newStatus) {
+            case BookingStatus.PAID:
+                newBikeStatus = BikeStatus.Available;
+                break;
+            case BookingStatus.IN_USE:
+                newBikeStatus = BikeStatus.InUse;
+                break;
+            case BookingStatus.FULFILLED:
+                newBikeStatus = BikeStatus.Returned;
+                break;
+        }
+
+        this.setBikeStatuses(newBikeStatus);
     }
 
 
