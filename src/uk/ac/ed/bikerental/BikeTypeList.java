@@ -11,7 +11,7 @@ public final class BikeTypeList {
     private static final BikeTypeList INSTANCE = new BikeTypeList();
     private Hashtable<String, BikeType> bikeTypeList;
 
-    public void BikeTypeList() {
+    private BikeTypeList() {
         this.bikeTypeList = new Hashtable<String, BikeType>();
     }
 
