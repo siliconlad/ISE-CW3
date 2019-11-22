@@ -44,6 +44,10 @@ public class Booking {
         return this.bikes;
     }
 
+    public Provider getProvider() {
+        return this.provider;
+    }
+
     public DateRange getDateRange() {
         return this.range;
     }
