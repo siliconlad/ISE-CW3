@@ -6,7 +6,6 @@ import java.util.ArrayList;
 public class Bike {
     BikeStatus bikeStatus;
     BikeType bikeType;
-    ArrayList<Booking> bookings;
     BigDecimal dailyRentalPrice;
     Provider provider = null;
 
@@ -14,7 +13,6 @@ public class Bike {
         this.bikeType = bikeType;
         this.bikeStatus = BikeStatus.Available;
         this.dailyRentalPrice = rentalPrice;
-        this.bookings = new ArrayList<Booking>();
     }
 
     public BikeType getType() {
@@ -33,12 +31,5 @@ public class Bike {
         assert newStatus != this.bikeStatus;
 
         this.bikeStatus = newStatus;
-    }
-
-    public void addBooking(Booking booking) {
-        // Check for invalid state
-        assert !this.bookings.contains(booking);
-
-        this.bookings.add(booking);
     }
 }
