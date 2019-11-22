@@ -1,10 +1,10 @@
 package uk.ac.ed.bikerental;
 
-import java.util.Collection;
+import java.util.ArrayList;
 
 public final class ProviderList {
     private static final ProviderList INSTANCE = new ProviderList();
-    private Collection<Provider> providerList;
+    private ArrayList<Provider> providerList;
 
     private ProviderList() {}
 
@@ -14,12 +14,13 @@ public final class ProviderList {
         providerList.add(provider);
     }
 
-    public Collection<Quote> getQuotes(Query query) {
-        Collection<Quote> quotes;
+    public ArrayList<Quote> getQuotes(Query query) {
+        ArrayList<Quote> quotes = new ArrayList<Quote>();
+        Location queryLocation = query.getLocation();
+
         for (Provider provider : providerList) {
-            Quote quote = provider.createQuote(query);
-            quotes.add(quote);
         }
+
         return quotes;
     }
 
