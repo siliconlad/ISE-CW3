@@ -68,7 +68,7 @@ public class Provider {
         }
 
         // Return quote
-        Quote quote = new Quote(bookingDates, eligibleBikes, getDepositRate());
+        Quote quote = new Quote(bookingDates, eligibleBikes, this);
         return quote;
     }
 

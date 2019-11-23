@@ -8,11 +8,13 @@ public class Quote {
     BigDecimal deposit;
     BigDecimal totalPrice;
     DateRange dateRange;
+    Provider provider;
 
-    public Quote(DateRange dateRange, ArrayList<Bike> bikes, BigDecimal depositRate) {
+    public Quote(DateRange dateRange, ArrayList<Bike> bikes, Provider provider) {
         this.dateRange = dateRange;
+        this.provider = provider;
         this.deposit = calculateTotalPrice(bikes);
-        this.totalPrice = calculateDeposit(bikes, depositRate);
+        this.totalPrice = calculateDeposit(bikes, this.provider.getDepositRate());
     }
 
     private BigDecimal calculateTotalPrice(ArrayList<Bike> bikes) {
