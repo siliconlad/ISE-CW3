@@ -3,6 +3,7 @@ package uk.ac.ed.bikerental;
 import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Collection;
+import java.util.ArrayList;
 
 public class Provider {
     private String name;
@@ -19,8 +20,61 @@ public class Provider {
     }
 
     public Quote createQuote(Query query) {
-        // TODO: need bookingList
-        assert(false);
+        BookingList bookingList = BookingList.getInstance();
+        ArrayList<Bike> eligibleBikes = new ArrayList<Bike>();
+        DateRange bookingDates = query.getDateRange();
+
+        for (BikeQuantity quantity : query.getQuantities()) {
+            BikeType type = quantity.getBikeType();
+            ArrayList<Bike> bikesOfType = getBikesOfType(type);
+            ArrayList<Bike> eligibleBikesOfType = new ArrayList<Bike>();
+            Integer numberOfType = quantity.getQuantity();
+
+            if (bikesOfType.size() < numberOfType) {
+                return null;
+            }
+
+            for (Bike bike : bikesOfType) {
+                Collection<Booking> bookings = bookingList.findBikeBookings(bike);
+
+                if (eligibleBikesOfType.size() == numberOfType) {
+                    break;
+                }
+
+                Boolean isBooked = false;
+                for (Booking booking : bookings) {
+                    if (bookingDates.overlaps(booking.getDateRange())) {
+                        isBooked = true;
+                        break;
+                    }
+                }
+
+                if (!isBooked) {
+                    eligibleBikesOfType.add(bike);
+                }
+            }
+
+            if (eligibleBikesOfType.size() == numberOfType) {
+                eligibleBikes.addAll(eligibleBikesOfType);
+            } else {
+                return null;
+            }
+        }
+
+        Quote quote = new Quote(bookingDates, eligibleBikes, getDepositRate());
+
+        return quote;
+    }
+
+    private ArrayList<Bike> getBikesOfType(BikeType bikeType) {
+        ArrayList<Bike> results = new ArrayList<Bike>();
+        for (Bike bike : this.bikes) {
+            if (bike.getType() == bikeType) {
+                results.add(bike);
+            }
+        }
+
+        return results;
     }
 
     public String getName() {
