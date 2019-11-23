@@ -24,23 +24,28 @@ public class Provider {
         ArrayList<Bike> eligibleBikes = new ArrayList<Bike>();
         DateRange bookingDates = query.getDateRange();
 
+        // Process each bike type specified in the query
         for (BikeQuantity quantity : query.getQuantities()) {
             BikeType type = quantity.getBikeType();
             ArrayList<Bike> bikesOfType = getBikesOfType(type);
             ArrayList<Bike> eligibleBikesOfType = new ArrayList<Bike>();
             Integer numberOfType = quantity.getQuantity();
 
+            // If provider doesn't have enough bikes of a certain type it cannot fulfill the query
             if (bikesOfType.size() < numberOfType) {
                 return null;
             }
 
+            // Check every bike of a specific type in the provider's stock
             for (Bike bike : bikesOfType) {
                 Collection<Booking> bookings = bookingList.findBikeBookings(bike);
 
+                // Stop once enough available bikes of a specific type are found
                 if (eligibleBikesOfType.size() == numberOfType) {
                     break;
                 }
 
+                // Check every booking associated with a certain bike of a specific type
                 Boolean isBooked = false;
                 for (Booking booking : bookings) {
                     if (bookingDates.overlaps(booking.getDateRange())) {
@@ -54,6 +59,7 @@ public class Provider {
                 }
             }
 
+            // Make sure number of eligible bikes is not less than the number in the query
             if (eligibleBikesOfType.size() == numberOfType) {
                 eligibleBikes.addAll(eligibleBikesOfType);
             } else {
@@ -61,11 +67,12 @@ public class Provider {
             }
         }
 
+        // Return quote
         Quote quote = new Quote(bookingDates, eligibleBikes, getDepositRate());
-
         return quote;
     }
 
+    // Returns an ArrayList of bikes with BikeType bikeType
     private ArrayList<Bike> getBikesOfType(BikeType bikeType) {
         ArrayList<Bike> results = new ArrayList<Bike>();
         for (Bike bike : this.bikes) {
@@ -90,6 +97,7 @@ public class Provider {
     }
 
     public void addPartner(Provider newPartner) {
+        // Check for invalid state
         assert !this.partners.contains(newPartner);
 
         this.partners.add(newPartner);
@@ -100,6 +108,7 @@ public class Provider {
     }
 
     public void addBikeToStock(Bike bike) {
+        // Check for invalid state
         assert !this.bikes.contains(bike);
 
         this.bikes.add(bike);
