@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.NoSuchElementException;
+import java.math.RoundingMode;
 
 public class MultidayPolicy implements PricingPolicy{
     private ArrayList<BigDecimal> discountPolicyTable;
@@ -23,20 +24,22 @@ public class MultidayPolicy implements PricingPolicy{
     @Override
     public BigDecimal calculatePrice(Collection<Bike> bikes, DateRange duration) {
         BigDecimal totalPrice = new BigDecimal(0);
-        totalPrice = totalPrice.setScale(2, BigDecimal.ROUND_HALF_UP);
+        BigDecimal noDays = new BigDecimal(duration.toDays());
         for (Bike bike: bikes) {
             BikeType typeOfBike = bike.getBikeType();
             BigDecimal priceOfBike = getPricing(typeOfBike);
-            priceOfBike = priceOfBike.multiply(duration);
+            priceOfBike = priceOfBike.multiply(noDays);
             totalPrice = totalPrice.add(priceOfBike);
         }
         BigDecimal discount = new BigDecimal(1);
-        discount = discount.subtract(getDiscount(duration));
+        discount = discount.subtract(getDiscount(noDays.intValue()));
         totalPrice = totalPrice.multiply(discount);
+
+        totalPrice = totalPrice.setScale(2, RoundingMode.HALF_UP);
         return totalPrice;
     }
 
-    private BigDecimal getDiscount(DateRange duration) {
+    private BigDecimal getDiscount(int duration) {
         int length = this.discountPolicyTable.size();
         if (length == 0) {
             return new BigDecimal(0);
@@ -46,7 +49,7 @@ public class MultidayPolicy implements PricingPolicy{
         return this.discountPolicyTable.get(duration - 1);
     }
 
-    private Hashtable<BikeType, BigDecimal> getPricing(BikeType bikeType) {
+    private BigDecimal getPricing(BikeType bikeType) {
         if (!this.pricingTable.containsKey(bikeType)) {
             throw new NoSuchElementException("Requested price for provided BikeType does not exist.");
         }
