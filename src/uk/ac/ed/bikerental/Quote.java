@@ -9,10 +9,12 @@ public class Quote {
     BigDecimal totalPrice;
     DateRange dateRange;
     Provider provider;
+    ArrayList<Bike> bikes;
 
     public Quote(DateRange dateRange, ArrayList<Bike> bikes, Provider provider) {
         this.dateRange = dateRange;
         this.provider = provider;
+        this.bikes = bikes;
         this.deposit = calculateTotalPrice(bikes);
         this.totalPrice = calculateDeposit(bikes, this.provider.getDepositRate());
     }
