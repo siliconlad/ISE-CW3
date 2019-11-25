@@ -20,17 +20,15 @@ public class System {
         return providers.getQuotes(query);
     }
 
-    public void bookQuote(Quote quote, CollectionMethod deliveryMethod) {
+    public Booking bookQuote(Quote quote, CollectionMethod deliveryMethod) {
+        Booking booking = bookings.newBooking(quote, deliveryMethod);
+
         if (deliveryMethod == CollectionMethod.Delivery) {
             Location pickup = quote.getProvider().getLocation();
             Location dropoff = quote.getLocation();
             LocalDate start = quote.getDateRange();
-            for (Bike b: quote.getBikes()) {
-                delivery.scheduleDelivery(b, pickup, dropoff, start);
-            }
+            delivery.scheduleDelivery(booking, pickup, dropoff, start);
         }
-
-        bookings.newBooking(quote, deliveryMethod);
     }
 
     public void updateBookingStatus(BookingStatus status, int orderNumber) {
