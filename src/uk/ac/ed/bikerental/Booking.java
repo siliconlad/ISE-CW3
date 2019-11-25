@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 
-public class Booking {
+public class Booking implements Deliverable {
     private ArrayList<Bike> bikes;
 
     private Provider provider;
@@ -62,6 +62,29 @@ public class Booking {
 
     public boolean containsBike(Bike bike) {
         return bikes.contains(bike);
+    }
+
+
+    public void onPickup() {
+        switch (this.getBookingStatus()) {
+            case BookingStatus.PAID:
+                this.setBikeStatuses(BikeStatus.EnRouteToCustomer);
+                break;
+            case BookingStatus.IN_USE:
+                this.setBikeStatuses(BikeStatus.EnRouteToProvider);
+                break;
+        }
+    }
+
+    public void onDropoff() {
+        switch (this.getBookingStatus()) {
+            case BookingStatus.PAID:
+                this.setStatus(BookingStatus.IN_USE);
+                break;
+            case BookingStatus.IN_USE:
+                this.setStatus(BookingStatus.FULFILLED);
+                break;
+        }
     }
 
     
