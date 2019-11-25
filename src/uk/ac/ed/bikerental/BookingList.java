@@ -24,6 +24,14 @@ public final class BookingList {
         this.bookings.put(number, booking);
     }
 
+    public Booking newBooking(Quote quote, CollectionMethod deliveryMethod) {
+        Booking booking = new Booking(quote, deliveryMethod, quote.getLocation());
+
+        this.addBooking(booking);
+
+        return booking;
+    }
+
     public Boolean contains(int number) {
         return this.bookings.containsKey(number);
     }
