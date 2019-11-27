@@ -2,23 +2,23 @@ package uk.ac.ed.bikerental;
 
 import java.util.Hashtable;
 import java.util.ArrayList;
+import java.util.Collection;
 
 
 public final class BookingList {
     private static final BookingList INSTANCE = new BookingList();
-    
+
     // Hashtable used to allow bookings to be looked up by order number
     private Hashtable<Integer, Booking> bookings;
 
     private BookingList() {
         this.bookings = new Hashtable<Integer, Booking>();
-    }  
-
-    public static BookingList getInstance() {
-        return this.INSTANCE;
     }
 
-    
+    public static BookingList getInstance() {
+        return INSTANCE;
+    }
+
     public void addBooking(Booking booking) {
         int number = this.bookings.keySet().max() + 1;
         this.bookings.put(number, booking);
@@ -38,7 +38,7 @@ public final class BookingList {
 
 
     public Booking findBooking(int number) {
-        return this.bookings.get(number)
+        return this.bookings.get(number);
     }
 
     public Collection<Booking> findProviderBookings(Provider provider) {
