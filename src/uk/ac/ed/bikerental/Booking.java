@@ -22,7 +22,7 @@ public class Booking implements Deliverable {
     public Booking(Quote quote, CollectionMethod collectionMethod, Location deliveryAddress) {
         this.bikes = new ArrayList<Bike>(quote.getBikes());
         this.provider = quote.getProvider();
-        this.range = quote.getDateRange();
+        this.dateRange = quote.getDateRange();
         this.deposit = quote.getDeposit();
         this.totalPrice = quote.getTotalPrice();
         this.collectionMethod = collectionMethod;
@@ -45,15 +45,17 @@ public class Booking implements Deliverable {
 
         BikeStatus newBikeStatus;
         switch (newStatus) {
-            case BookingStatus.PAID:
+            case PAID:
                 newBikeStatus = BikeStatus.Available;
                 break;
-            case BookingStatus.IN_USE:
+            case IN_USE:
                 newBikeStatus = BikeStatus.InUse;
                 break;
-            case BookingStatus.FULFILLED:
+            case FULFILLED:
                 newBikeStatus = BikeStatus.Returned;
                 break;
+            default:
+                throw new RuntimeException("Invalid booking status");
         }
 
         this.setBikeStatuses(newBikeStatus);
@@ -67,10 +69,10 @@ public class Booking implements Deliverable {
 
     public void onPickup() {
         switch (this.getBookingStatus()) {
-            case BookingStatus.PAID:
+            case PAID:
                 this.setBikeStatuses(BikeStatus.EnRouteToCustomer);
                 break;
-            case BookingStatus.IN_USE:
+            case IN_USE:
                 this.setBikeStatuses(BikeStatus.EnRouteToProvider);
                 break;
         }
@@ -78,16 +80,16 @@ public class Booking implements Deliverable {
 
     public void onDropoff() {
         switch (this.getBookingStatus()) {
-            case BookingStatus.PAID:
+            case PAID:
                 this.setStatus(BookingStatus.IN_USE);
                 break;
-            case BookingStatus.IN_USE:
+            case IN_USE:
                 this.setStatus(BookingStatus.FULFILLED);
                 break;
         }
     }
 
-    
+
     public Collection<Bike> getBikes() {
         return this.bikes;
     }
@@ -97,7 +99,7 @@ public class Booking implements Deliverable {
     }
 
     public DateRange getDateRange() {
-        return this.range;
+        return this.dateRange;
     }
 
     public BigDecimal getDeposit() {
@@ -109,7 +111,7 @@ public class Booking implements Deliverable {
     }
 
     public CollectionMethod getMethod() {
-        return this.method;
+        return this.collectionMethod;
     }
 
     public String getDeliveryInformation() {
