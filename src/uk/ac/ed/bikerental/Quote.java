@@ -49,4 +49,25 @@ public class Quote {
 
         return totalDeposit;
     }
+
+    public ArrayList<Bike> getBikes() {
+        return this.bikes;
+    }
+
+    public Provider getProvider() {
+        return this.provider;
+    }
+
+    public DateRange getDateRange() {
+        return this.dateRange;
+    }
+
+    public BigDecimal getDeposit() {
+        return this.deposit;
+    }
+
+    public BigDecimal getTotalPrice() {
+        return this.totalPrice;
+    }
+
 }
