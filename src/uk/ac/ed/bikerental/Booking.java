@@ -114,12 +114,8 @@ public class Booking implements Deliverable {
         return this.collectionMethod;
     }
 
-    public String getDeliveryInformation() {
-        return this.deliveryInformation;
-    }
-
-    public String getReturnInformation() {
-        return this.returnInformation;
+    public Location getDeliveryAddress() {
+        return this.deliveryAddress;
     }
 
     public BookingStatus getBookingStatus() {
