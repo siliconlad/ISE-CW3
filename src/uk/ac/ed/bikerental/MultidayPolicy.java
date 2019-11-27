@@ -26,7 +26,7 @@ public class MultidayPolicy implements PricingPolicy{
         BigDecimal totalPrice = new BigDecimal(0);
         BigDecimal noDays = new BigDecimal(duration.toDays());
         for (Bike bike: bikes) {
-            BikeType typeOfBike = bike.getBikeType();
+            BikeType typeOfBike = bike.getType();
             BigDecimal priceOfBike = getPricing(typeOfBike);
             priceOfBike = priceOfBike.multiply(noDays);
             totalPrice = totalPrice.add(priceOfBike);
