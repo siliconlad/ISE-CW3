@@ -11,12 +11,14 @@ public class Provider {
     private BigDecimal depositRate;
     private HashSet<Provider> partners;
     private Collection<Bike> bikes;
+    public PricingPolicyFactory pricingPolicyFactory;
 
     public Provider(String name, Location location, BigDecimal depositRate) {
         this.name = name;
         this.location = location;
         this.depositRate = depositRate;
         this.partners = new HashSet<Provider>();
+        this.pricingPolicy = new PricingPolicyFactory();
     }
 
     public Quote createQuote(Query query) {
