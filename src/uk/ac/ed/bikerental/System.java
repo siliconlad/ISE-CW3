@@ -27,7 +27,7 @@ public class System {
         if (deliveryMethod == CollectionMethod.Delivery) {
             Location pickup = quote.getProvider().getLocation();
             Location dropoff = quote.getLocation();
-            LocalDate start = quote.getDateRange();
+            LocalDate start = quote.getDateRange().getStart();
             delivery.scheduleDelivery(booking, pickup, dropoff, start);
         }
     }
