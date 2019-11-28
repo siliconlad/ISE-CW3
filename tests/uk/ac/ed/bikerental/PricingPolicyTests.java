@@ -45,7 +45,7 @@ public class PricingPolicyTests {
             new BigDecimal(0.10),
             new BigDecimal(0.10),
             new BigDecimal(0.15),
-        }
+        };
         discountPolicy = new ArrayList(Arrays.asList(policyArray));
 
         // Set up MultidayPolicy class
