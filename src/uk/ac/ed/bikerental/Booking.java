@@ -21,7 +21,7 @@ public class Booking implements Deliverable {
     private int bookingNumber;
 
 
-    public Booking(Quote quote, CollectionMethod collectionMethod, Location deliveryAddress, int bookingNumber) {
+    public Booking(Quote quote, CollectionMethod collectionMethod, Location deliveryAddress) {
         this.bikes = new ArrayList<Bike>(quote.getBikes());
         this.provider = quote.getProvider();
         this.dateRange = quote.getDateRange();
@@ -128,5 +128,9 @@ public class Booking implements Deliverable {
 
     public int getBookingNumber() {
         return this.bookingNumber;
+    }
+    
+    public void setBookingNumber(int number) {
+        this.bookingNumber = number;
     }
 }
