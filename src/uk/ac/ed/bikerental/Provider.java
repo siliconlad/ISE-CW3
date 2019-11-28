@@ -127,11 +127,11 @@ public class Provider {
         this.pricingPolicyFactory.setupPricingPolicy(discountPolicy);
     }
 
-    public void getPricingPolicy() {
+    public PricingPolicy getPricingPolicy() {
         return this.pricingPolicyFactory.getPricingPolicy();
     }
 
-    public void getValuationPolicy() {
+    public ValuationPolicy getValuationPolicy() {
         return this.valuationPolicyFactory.getValuationPolicy();
     }
 }
