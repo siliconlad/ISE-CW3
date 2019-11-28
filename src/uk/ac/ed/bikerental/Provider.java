@@ -12,6 +12,7 @@ public class Provider {
     private HashSet<Provider> partners;
     private Collection<Bike> bikes;
     public PricingPolicyFactory pricingPolicyFactory;
+    public ValuationPolicyFactory valuationPolicyFactory;
 
     public Provider(String name, Location location, BigDecimal depositRate) {
         this.name = name;
