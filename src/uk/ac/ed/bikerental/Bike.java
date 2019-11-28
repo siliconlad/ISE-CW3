@@ -21,6 +21,10 @@ public class Bike {
         return this.provider;
     }
 
+    public BikeStatus getStatus() {
+        return this.bikeStatus;
+    }
+
     public void addProvider(Provider provider) {
         // Check for invalid state
         assert this.provider == null;
