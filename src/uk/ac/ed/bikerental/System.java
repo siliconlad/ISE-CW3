@@ -16,7 +16,6 @@ public final class System {
         this.delivery = DeliveryServiceFactory.getDeliveryService();
     }
 
-
     public ArrayList<Quote> getQuotes(Query query) {
         return this.providers.getQuotes(query);
     }
@@ -33,7 +32,6 @@ public final class System {
 
         return booking;
     }
-
 
     public void returnToProvider(int bookingNumber, Provider provider) {
         Booking booking = bookings.findBooking(bookingNumber);
