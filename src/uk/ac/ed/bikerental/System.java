@@ -1,7 +1,7 @@
 package uk.ac.ed.bikerental;
 
 import java.util.ArrayList;
-import java.util.LocalDate;
+import java.time.LocalDate;
 
 
 public class System {
@@ -18,13 +18,13 @@ public class System {
 
 
     public ArrayList<Quote> getQuotes(Query query) {
-        return providers.getQuotes(query);
+        return this.providers.getQuotes(query);
     }
 
     public Booking bookQuote(Quote quote, CollectionMethod deliveryMethod) {
         Booking booking = bookings.newBooking(quote, deliveryMethod);
 
-        if (deliveryMethod == CollectionMethod.Delivery) {
+        if (deliveryMethod == CollectionMethod.DELIVERY) {
             Location pickup = quote.getProvider().getLocation();
             Location dropoff = quote.getLocation();
             LocalDate start = quote.getDateRange().getStart();
@@ -35,8 +35,8 @@ public class System {
 
     public void returnToProvider(int bookingNumber, Provider provider) {
         Booking booking = bookings.findBooking(bookingNumber);
-        
-        bookingProvider = booking.getProvider()
+
+        Provider bookingProvider = booking.getProvider();
         if (bookingProvider == provider) {
             booking.setStatus(BookingStatus.FULFILLED);
         }
@@ -48,6 +48,6 @@ public class System {
 
 
     public static System getInstance() {
-        return this.INSTANCE;
+        return INSTANCE;
     }
 }
