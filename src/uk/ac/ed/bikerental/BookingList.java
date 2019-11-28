@@ -21,7 +21,15 @@ public final class BookingList {
     }
 
     public void addBooking(Booking booking) {
-        int number = Collections.max(this.bookings.keySet()) + 1;
+        Collection<Integer> keys = this.bookings.keySet();
+
+        int number;
+        if (keys.size() != 0) {
+            number = Collections.max(this.bookings.keySet()) + 1;
+        }
+        else {
+            number = 0;
+        }
         booking.setBookingNumber(number);
         this.bookings.put(number, booking);
     }
