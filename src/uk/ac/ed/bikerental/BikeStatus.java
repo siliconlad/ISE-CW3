@@ -5,6 +5,7 @@ public enum BikeStatus {
     InUse,
     Unavailable,
     Returned,
+    ReturnedtoPartner,
     EnRouteToCustomer,
     EnRouteToProvider
 }

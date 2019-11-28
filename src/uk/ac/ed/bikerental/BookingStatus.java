@@ -3,5 +3,6 @@ package uk.ac.ed.bikerental;
 public enum BookingStatus {
     PAID, 
     IN_USE,
-    FULFILLED
+    WITH_PARTNER,
+    FULFILLED,
 }
