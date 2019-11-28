@@ -2,6 +2,7 @@ package uk.ac.ed.bikerental;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Collection;
 import java.util.Hashtable;
 
 
