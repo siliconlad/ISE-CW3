@@ -21,15 +21,17 @@ public final class System {
         return this.providers.getQuotes(query);
     }
 
-    public Booking bookQuote(Quote quote, CollectionMethod deliveryMethod) {
-        Booking booking = bookings.newBooking(quote, deliveryMethod);
+    public Booking bookQuote(Quote quote, CollectionMethod deliveryMethod, Location deliveryAddress) {
+        Booking booking = this.bookings.newBooking(quote, deliveryMethod, deliveryAddress);
 
         if (deliveryMethod == CollectionMethod.DELIVERY) {
             Location pickup = quote.getProvider().getLocation();
-            Location dropoff = quote.getLocation();
+            Location dropoff = deliveryAddress;
             LocalDate start = quote.getDateRange().getStart();
             delivery.scheduleDelivery(booking, pickup, dropoff, start);
         }
+
+        return booking;
     }
 
 
