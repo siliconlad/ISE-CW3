@@ -25,8 +25,8 @@ public final class BookingList {
         this.bookings.put(number, booking);
     }
 
-    public Booking newBooking(Quote quote, CollectionMethod deliveryMethod) {
-        Booking booking = new Booking(quote, deliveryMethod, quote.getLocation());
+    public Booking newBooking(Quote quote, CollectionMethod deliveryMethod, Location deliveryAddress) {
+        Booking booking = new Booking(quote, deliveryMethod, deliveryAddress);
 
         this.addBooking(booking);
 
