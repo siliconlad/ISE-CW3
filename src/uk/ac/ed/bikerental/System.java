@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.time.LocalDate;
 
 
-    private System INSTANCE = new System();
 public final class System {
+    private static final System INSTANCE = new System();
     private ProviderList providers;
     private BookingList bookings;
     private DeliveryService delivery;
