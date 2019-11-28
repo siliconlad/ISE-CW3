@@ -8,7 +8,7 @@ public class Bike {
     BikeType bikeType;
     Provider provider = null;
 
-    public void Bike(BikeType bikeType) {
+    public Bike(BikeType bikeType) {
         this.bikeType = bikeType;
         this.bikeStatus = BikeStatus.AVAILABLE;
     }
