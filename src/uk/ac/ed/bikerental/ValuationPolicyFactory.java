@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 public class ValuationPolicyFactory {
     private DefaultValuationPolicy defaultPolicyInstance;
 
-    public void ValuationPolicyFactory() {
+    public ValuationPolicyFactory() {
         defaultPolicyInstance = new DefaultValuationPolicy();
     }
 

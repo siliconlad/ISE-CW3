@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public class DefaultValuationPolicy implements ValuationPolicy{
-    public void DefaultPricingPolicy() {}
+    public DefaultPricingPolicy() {}
 
     @Override
     public BigDecimal calculateValue(Bike bike, LocalDate date) {
