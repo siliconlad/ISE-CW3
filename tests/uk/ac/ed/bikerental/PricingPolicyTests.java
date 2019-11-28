@@ -68,7 +68,7 @@ public class PricingPolicyTests {
     @Test
     void testCalculatePrice5Discount() {
         DateRange testRange = new DateRange(LocalDate.of(2019, 11, 25), LocalDate.of(2019, 11, 28));
-        BigDecimal actualPrice = new BigDecimal(66.5);
+        BigDecimal actualPrice = new BigDecimal(199.5);
         BigDecimal calcPrice = this.policy.calculatePrice(this.bikes, testRange);
 
         assertEquals(actualPrice.stripTrailingZeros(), calcPrice.stripTrailingZeros());
@@ -77,7 +77,7 @@ public class PricingPolicyTests {
     @Test
     void testCalculatePrice10Discount() {
         DateRange testRange = new DateRange(LocalDate.of(2019, 11, 25), LocalDate.of(2019, 12, 3));
-        BigDecimal actualPrice = new BigDecimal(63.0);
+        BigDecimal actualPrice = new BigDecimal(504);
         BigDecimal calcPrice = this.policy.calculatePrice(this.bikes, testRange);
 
         assertEquals(actualPrice.stripTrailingZeros(), calcPrice.stripTrailingZeros());
@@ -86,7 +86,7 @@ public class PricingPolicyTests {
     @Test
     void testCalculatePrice15Discount() {
         DateRange testRange = new DateRange(LocalDate.of(2019, 11, 25), LocalDate.of(2019, 12, 9));
-        BigDecimal actualPrice = new BigDecimal(59.5);
+        BigDecimal actualPrice = new BigDecimal(833);
         BigDecimal calcPrice = this.policy.calculatePrice(this.bikes, testRange);
 
         assertEquals(actualPrice.stripTrailingZeros(), calcPrice.stripTrailingZeros());
@@ -96,7 +96,7 @@ public class PricingPolicyTests {
     @Test
     void testCalculatePriceEdgeDiscount() {
         DateRange testRange = new DateRange(LocalDate.of(2019, 11, 25), LocalDate.of(2019, 12, 25));
-        BigDecimal actualPrice = new BigDecimal(59.5);
+        BigDecimal actualPrice = new BigDecimal(1785);
         BigDecimal calcPrice = this.policy.calculatePrice(this.bikes, testRange);
 
         assertEquals(actualPrice.stripTrailingZeros(), calcPrice.stripTrailingZeros());
