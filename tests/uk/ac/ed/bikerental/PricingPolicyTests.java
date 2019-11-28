@@ -26,8 +26,8 @@ public class PricingPolicyTests {
 
         // Set up Bike ArrayList
         this.bikes = new ArrayList<Bike>();
-        this.bikes.add(new Bike(type1, new BigDecimal(0)));
-        this.bikes.add(new Bike(type2, new BigDecimal(0)));
+        this.bikes.add(new Bike(type1));
+        this.bikes.add(new Bike(type2));
 
         // Set up policy arrayList
         BigDecimal[] policyArray = {
