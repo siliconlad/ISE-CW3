@@ -6,21 +6,15 @@ import java.util.ArrayList;
 public class Bike {
     BikeStatus bikeStatus;
     BikeType bikeType;
-    BigDecimal dailyRentalPrice;
     Provider provider = null;
 
     public void Bike(BikeType bikeType, BigDecimal rentalPrice) {
         this.bikeType = bikeType;
         this.bikeStatus = BikeStatus.Available;
-        this.dailyRentalPrice = rentalPrice;
     }
 
     public BikeType getType() {
         return this.bikeType;
-    }
-
-    public BigDecimal getDailyRentalPrice() {
-        return this.dailyRentalPrice;
     }
 
     public Provider getProvider() {
