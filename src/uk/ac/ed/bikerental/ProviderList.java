@@ -6,7 +6,9 @@ public final class ProviderList {
     private static final ProviderList INSTANCE = new ProviderList();
     private ArrayList<Provider> providerList;
 
-    private ProviderList() {}
+    private ProviderList() {
+        providerList = new ArrayList<Provider>();
+    }
 
     public void addProvider(Provider provider) {
         assert !providerList.contains(provider);
