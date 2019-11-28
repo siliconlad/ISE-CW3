@@ -46,13 +46,13 @@ public class Booking implements Deliverable {
         BikeStatus newBikeStatus;
         switch (newStatus) {
             case PAID:
-                newBikeStatus = BikeStatus.Available;
+                newBikeStatus = BikeStatus.AVAILABLE;
                 break;
             case IN_USE:
-                newBikeStatus = BikeStatus.InUse;
+                newBikeStatus = BikeStatus.IN_USE;
                 break;
             case FULFILLED:
-                newBikeStatus = BikeStatus.Returned;
+                newBikeStatus = BikeStatus.RETURNED;
                 break;
             default:
                 throw new RuntimeException("Invalid booking status");
@@ -70,10 +70,10 @@ public class Booking implements Deliverable {
     public void onPickup() {
         switch (this.getBookingStatus()) {
             case PAID:
-                this.setBikeStatuses(BikeStatus.EnRouteToCustomer);
+                this.setBikeStatuses(BikeStatus.ENROUTE_TO_CUSTOMER);
                 break;
             case WITH_PARTNER:
-                this.setBikeStatuses(BikeStatus.EnRouteToProvider);
+                this.setBikeStatuses(BikeStatus.ENROUTE_TO_PROVIDER);
                 break;
         }
     }

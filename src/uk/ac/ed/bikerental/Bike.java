@@ -10,7 +10,7 @@ public class Bike {
 
     public void Bike(BikeType bikeType) {
         this.bikeType = bikeType;
-        this.bikeStatus = BikeStatus.Available;
+        this.bikeStatus = BikeStatus.AVAILABLE;
     }
 
     public BikeType getType() {
