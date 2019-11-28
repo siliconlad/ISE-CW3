@@ -4,16 +4,16 @@ import java.util.ArrayList;
 import java.time.LocalDate;
 
 
-public class System {
     private System INSTANCE = new System();
-
-    private ProviderList providers = ProviderList.getInstance();
-    private BookingList bookings = BookingList.getInstance();
-
-    private DeliveryService delivery = DeliveryServiceFactory.getDeliveryService();
+public final class System {
+    private ProviderList providers;
+    private BookingList bookings;
+    private DeliveryService delivery;
 
     public System() {
-        ;
+        this.providers = ProviderList.getInstance();
+        this.bookings = BookingList.getInstance();
+        this.delivery = DeliveryServiceFactory.getDeliveryService();
     }
 
 
