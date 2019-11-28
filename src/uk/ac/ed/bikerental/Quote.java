@@ -22,14 +22,14 @@ public class Quote {
     }
 
     private BigDecimal calculatePrice(ArrayList<Bike> bikes, Provider provider, DateRange dateRange) {
-        PricingPolicy pricingPolicy = provider.pricingPolicyFactory.getPricingPolicy();
+        PricingPolicy pricingPolicy = provider.getPricingPolicy();
         BigDecimal totalPrice = pricingPolicy.calculatePrice(bikes, dateRange);
         return totalPrice;
     }
 
     private BigDecimal calculateDeposit(ArrayList<Bike> bikes, Provider provider, LocalDate start) {
         BigDecimal depositRate = provider.getDepositRate();
-        ValuationPolicy valuationPolicy = provider.valuationPolicyFactory.getValuationPolicy();
+        ValuationPolicy valuationPolicy = provider.getValuationPolicy();
 
         BigDecimal totalDeposit = new BigDecimal(0);
 

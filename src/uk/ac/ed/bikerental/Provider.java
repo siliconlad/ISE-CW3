@@ -122,4 +122,16 @@ public class Provider {
         PricingPolicy policy = this.pricingPolicyFactory.getPricingPolicy();
         policy.setDailyRentalPrice(bikeType, dailyPrice);
     }
+
+    public void setMultidayPolicy(ArrayList<BigDecimal> discountPolicy) {
+        this.pricingPolicyFactory.setupPricingPolicy(discountPolicy);
+    }
+
+    public void getPricingPolicy() {
+        return this.pricingPolicyFactory.getPricingPolicy();
+    }
+
+    public void getValuationPolicy() {
+        return this.valuationPolicyFactory.getValuationPolicy();
+    }
 }
