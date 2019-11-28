@@ -7,7 +7,7 @@ import java.util.Hashtable;
 import java.util.NoSuchElementException;
 import java.math.RoundingMode;
 
-public class DefaultPricingPolicy implements PricingPolicy{
+public class DefaultPricingPolicy implements PricingPolicy {
     private Hashtable<BikeType, BigDecimal> pricingTable;
 
     public DefaultPricingPolicy() {
@@ -22,12 +22,14 @@ public class DefaultPricingPolicy implements PricingPolicy{
     @Override
     public BigDecimal calculatePrice(Collection<Bike> bikes, DateRange duration) {
         BigDecimal totalPrice = new BigDecimal(0);
+        BigDecimal days = new BigDecimal(duration.toDays());
 
         for (Bike bike : bikes) {
             BikeType type = bike.getType();
             totalPrice = totalPrice.add(this.getPricing(type));
         }
 
+        totalPrice = totalPrice.multiply(days);
         totalPrice = totalPrice.setScale(2, RoundingMode.HALF_UP);
         return totalPrice;
     }
