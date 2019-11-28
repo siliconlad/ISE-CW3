@@ -49,13 +49,19 @@ public class SystemTests {
         p1 = new Provider("The Bike Store", new Location("EH2 1GF", "123 Fake Street"), new BigDecimal(0.20));
         p1.setRentalPrice(t1, new BigDecimal(10));
         p1.setRentalPrice(t2, new BigDecimal(10));
+        providers.addProvider(p1);
+
         p2 = new Provider("Another Bike Store", new Location("EH3 5X7", "456 Fictitious Place"), new BigDecimal(0.30));
         p2.setRentalPrice(t1, new BigDecimal(10));
         p2.setRentalPrice(t2, new BigDecimal(10));
+        providers.addProvider(p2);
+
         // Provider p3 is in a different location to test quote searching algorithm
         p3 = new Provider("Bikes", new Location("DD3 8FF", "70 Weird Avenue"), new BigDecimal(0.10));
         p3.setRentalPrice(t1, new BigDecimal(10));
         p3.setRentalPrice(t2, new BigDecimal(10));
+        providers.addProvider(p3);
+
         p1.addPartner(p2);
         p2.addPartner(p1);
 
