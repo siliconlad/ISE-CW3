@@ -10,7 +10,7 @@ import java.math.RoundingMode;
 public class DefaultPricingPolicy implements PricingPolicy{
     private Hashtable<BikeType, BigDecimal> pricingTable;
 
-    public DefaultPricingPolicy() {
+    public void DefaultPricingPolicy() {
         this.pricingTable = new Hashtable<BikeType, BigDecimal>();
     }
 
