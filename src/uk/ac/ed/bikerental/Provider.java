@@ -117,4 +117,9 @@ public class Provider {
 
         this.bikes.add(bike);
     }
+
+    public void setRentalPrice(BikeType bikeType, BigDecimal dailyPrice) {
+        PricingPolicy policy = this.pricingPolicyFactory.getPricingPolicy();
+        policy.setDailyRentalPrice(bikeType, dailyPrice);
+    }
 }
