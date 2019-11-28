@@ -1,6 +1,7 @@
 package uk.ac.ed.bikerental;
 
 import java.util.ArrayList;
+import java.util.LocalDate;
 
 
 public class System {
@@ -9,7 +10,7 @@ public class System {
     private ProviderList providers = ProviderList.getInstance();
     private BookingList bookings = BookingList.getInstance();
 
-    private DeliveryService delivery = DeliveryServiceFactory.setupMockDeliveryService();
+    private DeliveryService delivery = DeliveryServiceFactory.getDeliveryService();
 
     public System() {
         ;
@@ -26,14 +27,23 @@ public class System {
         if (deliveryMethod == CollectionMethod.Delivery) {
             Location pickup = quote.getProvider().getLocation();
             Location dropoff = quote.getLocation();
-            LocalDate start = quote.getDateRange();
+            LocalDate start = quote.getDateRange().getStart();
             delivery.scheduleDelivery(booking, pickup, dropoff, start);
         }
     }
 
-    public void updateBookingStatus(BookingStatus status, int orderNumber) {
-        Booking booking = bookings.findBooking(orderNumber);
-        booking.setStatus(status);
+
+    public void returnToProvider(int bookingNumber, Provider provider) {
+        Booking booking = bookings.findBooking(bookingNumber);
+        
+        bookingProvider = booking.getProvider()
+        if (bookingProvider == provider) {
+            booking.setStatus(BookingStatus.FULFILLED);
+        }
+        else if (bookingProvider.isPartner(provider)) {
+            booking.setStatus(BookingStatus.WITH_PARTNER);
+            delivery.scheduleDelivery(booking, provider.getLocation(), bookingProvider.getLocation(), LocalDate.now());
+        }
     }
 
 

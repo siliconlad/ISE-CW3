@@ -1,8 +1,8 @@
 package uk.ac.ed.bikerental;
 
-import java.util.Hashtable;
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.Collections;
+import java.util.Hashtable;
 
 
 public final class BookingList {
@@ -20,12 +20,12 @@ public final class BookingList {
     }
 
     public void addBooking(Booking booking) {
-        int number = this.bookings.keySet().max() + 1;
+        int number = Collections.max(this.bookings.keySet()) + 1;
         this.bookings.put(number, booking);
     }
 
-    public Booking newBooking(Quote quote, CollectionMethod deliveryMethod) {
-        Booking booking = new Booking(quote, deliveryMethod, quote.getLocation());
+    public Booking newBooking(Quote quote, CollectionMethod deliveryMethod, Location deliveryAddress) {
+        Booking booking = new Booking(quote, deliveryMethod, deliveryAddress);
 
         this.addBooking(booking);
 

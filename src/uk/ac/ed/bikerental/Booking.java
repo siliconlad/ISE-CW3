@@ -72,7 +72,7 @@ public class Booking implements Deliverable {
             case PAID:
                 this.setBikeStatuses(BikeStatus.EnRouteToCustomer);
                 break;
-            case IN_USE:
+            case WITH_PARTNER:
                 this.setBikeStatuses(BikeStatus.EnRouteToProvider);
                 break;
         }
@@ -83,7 +83,7 @@ public class Booking implements Deliverable {
             case PAID:
                 this.setStatus(BookingStatus.IN_USE);
                 break;
-            case IN_USE:
+            case WITH_PARTNER:
                 this.setStatus(BookingStatus.FULFILLED);
                 break;
         }
