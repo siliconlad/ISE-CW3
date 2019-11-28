@@ -11,8 +11,8 @@ public class Provider {
     private BigDecimal depositRate;
     private HashSet<Provider> partners;
     private Collection<Bike> bikes;
-    public PricingPolicyFactory pricingPolicyFactory;
-    public ValuationPolicyFactory valuationPolicyFactory;
+    private PricingPolicyFactory pricingPolicyFactory;
+    private ValuationPolicyFactory valuationPolicyFactory;
 
     public Provider(String name, Location location, BigDecimal depositRate) {
         this.name = name;
@@ -118,8 +118,8 @@ public class Provider {
         this.bikes.add(bike);
     }
 
-    public void setRentalPrice(BikeType bikeType, BigDecimal dailyPrice) {
-        PricingPolicy policy = this.pricingPolicyFactory.getPricingPolicy();
+    public void setRentalPrice(BikeType bikeType, BigDecimal dailyPrice) throws Exception {
+        PricingPolicy policy = this.getPricingPolicy();
         policy.setDailyRentalPrice(bikeType, dailyPrice);
     }
 
