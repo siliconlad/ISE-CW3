@@ -23,7 +23,7 @@ public class Quote {
 
     private BigDecimal calculatePrice(ArrayList<Bike> bikes, Provider provider, DateRange dateRange) {
         PricingPolicy pricingPolicy = provider.pricingPolicyFactory.getPricingPolicy();
-        BigDecimal totalPrice = pricingPolicy.calculateTotalPrice(bikes, dateRange);
+        BigDecimal totalPrice = pricingPolicy.calculatePrice(bikes, dateRange);
         return totalPrice;
     }
 
@@ -40,7 +40,7 @@ public class Quote {
 
         totalDeposit = totalDeposit.multiply(provider.getDepositRate());
         totalDeposit = totalDeposit.setScale(2, RoundingMode.HALF_UP);
-        
+
         return totalDeposit;
     }
 
