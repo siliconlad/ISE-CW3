@@ -21,6 +21,9 @@ public class Provider {
         this.partners = new HashSet<Provider>();
         this.pricingPolicyFactory = new PricingPolicyFactory();
         this.valuationPolicyFactory = new ValuationPolicyFactory();
+
+        this.bikes = new ArrayList<Bike>();
+        this.partners = new HashSet<Provider>();
     }
 
     public Quote createQuote(Query query) {
