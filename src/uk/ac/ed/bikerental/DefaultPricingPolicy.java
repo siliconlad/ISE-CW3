@@ -24,7 +24,8 @@ public class DefaultPricingPolicy implements PricingPolicy{
         BigDecimal totalPrice = new BigDecimal(0);
 
         for (Bike bike : bikes) {
-            totalPrice = totalPrice.add(bike.getDailyRentalPrice());
+            BikeType type = bike.getType();
+            totalPrice = totalPrice.add(this.getPricing(type));
         }
 
         totalPrice = totalPrice.setScale(2, RoundingMode.HALF_UP);
