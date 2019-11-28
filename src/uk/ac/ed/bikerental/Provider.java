@@ -18,7 +18,7 @@ public class Provider {
         this.location = location;
         this.depositRate = depositRate;
         this.partners = new HashSet<Provider>();
-        this.pricingPolicy = new PricingPolicyFactory();
+        this.pricingPolicyFactory = new PricingPolicyFactory();
         this.valuationPolicyFactory = new ValuationPolicyFactory();
     }
 

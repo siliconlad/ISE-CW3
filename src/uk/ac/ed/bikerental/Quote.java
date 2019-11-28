@@ -17,10 +17,14 @@ public class Quote {
         this.provider = provider;
         this.bikes = bikes;
 
-        PricingPolicy pricingPolicy = provider.pricingPolicyFactory.getPricingPolicy();
-        this.totalPrice = pricingPolicy.calculateTotalPrice(bikes, dateRange);
         this.deposit = calculateDeposit(bikes, provider, dateRange.getStart());
+        this.totalPrice = calculatePrice(bikes, provider, dateRange);
+    }
 
+    private BigDecimal calculatePrice(ArrayList<Bike> bikes, Provider provider, DateRange dateRange) {
+        PricingPolicy pricingPolicy = provider.pricingPolicyFactory.getPricingPolicy();
+        BigDecimal totalPrice = pricingPolicy.calculateTotalPrice(bikes, dateRange);
+        return totalPrice;
     }
 
     private BigDecimal calculateDeposit(ArrayList<Bike> bikes, Provider provider, LocalDate start) {
