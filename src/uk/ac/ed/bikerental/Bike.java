@@ -8,7 +8,7 @@ public class Bike {
     BikeType bikeType;
     Provider provider = null;
 
-    public void Bike(BikeType bikeType, BigDecimal rentalPrice) {
+    public void Bike(BikeType bikeType) {
         this.bikeType = bikeType;
         this.bikeStatus = BikeStatus.Available;
     }
