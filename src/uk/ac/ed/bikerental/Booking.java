@@ -58,6 +58,9 @@ public class Booking implements Deliverable {
             case FULFILLED:
                 newBikeStatus = BikeStatus.RETURNED;
                 break;
+            case WITH_PARTNER:
+                newBikeStatus = BikeStatus.RETURNED_TO_PARTNER;
+                break;
             default:
                 throw new RuntimeException("Invalid booking status");
         }
