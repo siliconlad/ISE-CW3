@@ -9,7 +9,7 @@ public class System {
     private ProviderList providers = ProviderList.getInstance();
     private BookingList bookings = BookingList.getInstance();
 
-    private DeliveryService delivery = DeliveryServiceFactory.setupMockDeliveryService();
+    private DeliveryService delivery = DeliveryServiceFactory.getMockDeliveryService();
 
     public System() {
         ;
