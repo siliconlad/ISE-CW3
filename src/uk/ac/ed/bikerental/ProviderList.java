@@ -23,7 +23,10 @@ public final class ProviderList {
         for (Provider provider : providerList) {
             if (queryLocation.isNearTo(provider.getLocation())) {
                 Quote quote = provider.createQuote(query);
-                quotes.add(quote);
+
+                if (quote != null) {
+                    quotes.add(quote);
+                }
             }
         }
 
