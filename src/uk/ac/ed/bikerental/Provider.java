@@ -19,6 +19,7 @@ public class Provider {
         this.depositRate = depositRate;
         this.partners = new HashSet<Provider>();
         this.pricingPolicy = new PricingPolicyFactory();
+        this.valuationPolicyFactory = new ValuationPolicyFactory();
     }
 
     public Quote createQuote(Query query) {
