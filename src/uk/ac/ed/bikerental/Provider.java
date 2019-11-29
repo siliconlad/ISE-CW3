@@ -66,6 +66,7 @@ public class Provider {
                 }
             }
 
+
             // Make sure number of eligible bikes is not less than the number in the query
             if (eligibleBikesOfType.size() == numberOfType) {
                 eligibleBikes.addAll(eligibleBikesOfType);
@@ -121,7 +122,7 @@ public class Provider {
         this.bikes.add(bike);
     }
 
-    public void setRentalPrice(BikeType bikeType, BigDecimal dailyPrice) throws Exception {
+    public void setRentalPrice(BikeType bikeType, BigDecimal dailyPrice) {
         PricingPolicy policy = this.getPricingPolicy();
         policy.setDailyRentalPrice(bikeType, dailyPrice);
     }
