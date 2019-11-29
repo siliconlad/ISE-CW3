@@ -21,8 +21,8 @@ public class SystemTests {
     static System system;
 
     static BikeType t1, t2, t3;
-    static Provider p1, p2, p3;
-    static Bike b1, b2, b3, b4;
+    static Provider p1, p2, p3, p4;
+    static Bike b1, b2, b3, b4, b5;
 
     static DateRange freeRange, bookedRange;
     static Location deliveryAddress;
@@ -62,6 +62,29 @@ public class SystemTests {
         p3.setRentalPrice(t2, new BigDecimal(10));
         providers.addProvider(p3);
 
+        // Provider p4 uses MultidayPolicy to test extension
+        p4 = new Provider("EasyBike", new Location("EH3 4FG", "Fake Places"), new BigDecimal(0.20));
+        BigDecimal[] policyArray = {
+            new BigDecimal(0),
+            new BigDecimal(0),
+            new BigDecimal(0.05),
+            new BigDecimal(0.05),
+            new BigDecimal(0.05),
+            new BigDecimal(0.05),
+            new BigDecimal(0.10),
+            new BigDecimal(0.10),
+            new BigDecimal(0.10),
+            new BigDecimal(0.10),
+            new BigDecimal(0.10),
+            new BigDecimal(0.10),
+            new BigDecimal(0.10),
+            new BigDecimal(0.15),
+        };
+        ArrayList<BigDecimal> discountPolicy = new ArrayList<BigDecimal>(Arrays.asList(policyArray));
+        p4.setMultidayPolicy(discountPolicy);
+        p4.setRentalPrice(t3, new BigDecimal(10));
+        providers.addProvider(p4);
+
         // Set up partnership between p1 and p2 (for returnToProvider)
         p1.addPartner(p2);
         p2.addPartner(p1);
@@ -76,6 +99,8 @@ public class SystemTests {
         p3.addBikeToStock(b3);
         b4 = new Bike(t1);
         p1.addBikeToStock(b4);
+        b5 = new Bike(t3);
+        p4.addBikeToStock(b5);
 
         // Set up delivery ranges and details
         bookedRange = new DateRange(LocalDate.of(2020, 1, 2), LocalDate.of(2020, 1, 6));
@@ -154,6 +179,33 @@ public class SystemTests {
             }
         }
 
+    }
+
+
+    @Test
+    void testFindQuoteMultiday() {
+        // Set up Query and fetch Quotes
+        BikeQuantity quantity = new BikeQuantity(t3, 1);
+        ArrayList<BikeQuantity> quantityHolder = new ArrayList<BikeQuantity>();
+        quantityHolder.add(quantity);
+        Query query = new Query(quantityHolder, bookedRange, deliveryAddress);
+        ArrayList<Quote> quotes = system.getQuotes(query);
+
+        // Check that only one quote (ideally the valid one) is returned
+        assertEquals(quotes.size(), 1);
+
+        // Extract said quote from the list and check that it is accurate
+        Quote q = quotes.get(0);
+        assertEquals(1, q.getBikes().size());
+        assertTrue(q.getBikes().contains(b5));
+        assertEquals(q.getProvider(), p4);
+        assertEquals(q.getDateRange(), bookedRange);
+
+        BigDecimal actualDeposit = new BigDecimal(1);
+        assertEquals(q.getDeposit().stripTrailingZeros(), actualDeposit.stripTrailingZeros());
+
+        BigDecimal actualTotalPrice = new BigDecimal(38.0);
+        assertEquals(q.getTotalPrice().stripTrailingZeros(), actualTotalPrice.stripTrailingZeros());
     }
 
 
