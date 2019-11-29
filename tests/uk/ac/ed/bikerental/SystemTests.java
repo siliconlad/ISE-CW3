@@ -74,6 +74,8 @@ public class SystemTests {
         p2.addBikeToStock(b2);
         b3 = new Bike(t1);
         p3.addBikeToStock(b3);
+        b4 = new Bike(t1);
+        p1.addBikeToStock(b4);
 
         // Set up delivery ranges and details
         bookedRange = new DateRange(LocalDate.of(2020, 1, 2), LocalDate.of(2020, 1, 6));
@@ -94,9 +96,7 @@ public class SystemTests {
 
     @Test
     void testFindQuoteBooked() {
-        // Add booked bike to check that it is not returned in testFindQuoteBooked()
-        b4 = new Bike(t1);
-        p1.addBikeToStock(b4);
+        // Book Bike b4 to check that it is not returned
         ArrayList<Bike> bikeHolder = new ArrayList<Bike>();
         bikeHolder.add(b4);
         Quote quoteHolder = new Quote(bookedRange, bikeHolder, p1);
@@ -133,12 +133,25 @@ public class SystemTests {
         quantityHolder.add(quantity);
         Query query = new Query(quantityHolder, freeRange, deliveryAddress);
         ArrayList<Quote> quotes = system.getQuotes(query);
-        // Check that bikes 2 and 3
+
+        // Check that only b1 and b4 are contained in Quote
+        boolean containsB1, containsB4;
+        containsB1 = containsB4 = false;
         for (Quote q: quotes) {
-            assertFalse(q.getBikes().contains(b2));
-            assertFalse(q.getBikes().contains(b3));
+            ArrayList<Bike> bs = q.getBikes();
+            assertFalse(bs.contains(b2));
+            assertFalse(bs.contains(b3));
             assertEquals(q.getProvider(), p1);
+
+            if (bs.contains(b1)) {
+                containsB1 = true;
+            }
+
+            if (bs.contains(b4)) {
+                containsB4 = true;
+            }
         }
+
     }
 
 
