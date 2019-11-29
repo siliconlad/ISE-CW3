@@ -28,7 +28,6 @@ public class Quote {
     }
 
     private BigDecimal calculateDeposit(ArrayList<Bike> bikes, Provider provider, LocalDate start) {
-        BigDecimal depositRate = provider.getDepositRate();
         ValuationPolicy valuationPolicy = provider.getValuationPolicy();
 
         BigDecimal totalDeposit = new BigDecimal(0);
