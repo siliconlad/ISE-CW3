@@ -23,6 +23,7 @@ public final class BookingList {
     public void addBooking(Booking booking) {
         Collection<Integer> keys = this.bookings.keySet();
 
+        // Generate a unique number for the booking 
         int number;
         if (keys.size() != 0) {
             number = Collections.max(this.bookings.keySet()) + 1;
