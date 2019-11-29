@@ -119,6 +119,7 @@ public class SystemTests {
 
     // Tests for use case 'Finding a quote'
 
+    // Test that booked Bikes are not returned 
     @Test
     void testFindQuoteBooked() {
         // Book Bike b4 to check that it is not returned
@@ -151,9 +152,10 @@ public class SystemTests {
         assertEquals(q.getTotalPrice().stripTrailingZeros(), actualTotalPrice.stripTrailingZeros());
     }
 
+    // Check that those same Bikes are returned when left free
     @Test
     void testFindQuoteFree() {
-        // Set up Query and fetch quotes
+        // Set up Query and fetch Quotes
         BikeQuantity quantity = new BikeQuantity(t1, 1);
         ArrayList<BikeQuantity> quantityHolder = new ArrayList<BikeQuantity>();
         quantityHolder.add(quantity);
@@ -182,6 +184,7 @@ public class SystemTests {
     }
 
 
+    // Check that MultidayPolicy integrates correctly with the creation of Quotes
     @Test
     void testFindQuoteMultiday() {
         // Set up Query and fetch Quotes
@@ -211,6 +214,7 @@ public class SystemTests {
 
     // Tests for use case 'Booking a quote'
 
+    // Check that booking is made correctly when customer chooses collection
     @Test
     void testBookQuoteCollection() {
         // Create an example Quote for the System to book
@@ -235,6 +239,7 @@ public class SystemTests {
     }
 
 
+    // Check that booking is made correctly when customer chooses collection
     @Test
     void testBookQuoteDelivery() {
         // Create an example Quote for the System to book
@@ -262,6 +267,7 @@ public class SystemTests {
 
     // Tests for use case 'Returning bikes'
 
+    // Check that statuses are set correctly when Bike is returned to original Provider
     @Test
     void testReturnBikeOriginal() {
         // Book a Quote for the System to return
@@ -279,6 +285,7 @@ public class SystemTests {
         }
     }
 
+    // Check that statuses are set correctly when Bike is returned to a partner of the original provider
     @Test
     void testReturnBikeProvider() {
         // Book a Quote for the System to return
@@ -297,6 +304,7 @@ public class SystemTests {
     }
 
 
+    // Test integration of 'Find booking' and 'Book Quote' use cases
     @Test
     void testIntegration() {
         // Fetch a quote
