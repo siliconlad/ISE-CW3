@@ -79,6 +79,12 @@ public class SystemTests {
         freeRange = new DateRange(LocalDate.of(2019, 12, 26), LocalDate.of(2019, 12, 28));
         deliveryAddress = new Location("EH1 3DG", "St Andrews House");
 
+    }
+
+    @BeforeEach
+    void flushBookings() {
+        bookings.clear();
+
         // Add "booked" bike to check that it is not returned by Quote fetching method
         b4 = new Bike(t1);
         p1.addBikeToStock(b4);
