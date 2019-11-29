@@ -209,4 +209,25 @@ public class SystemTests {
             assertEquals(bike.getStatus(), BikeStatus.RETURNED_TO_PARTNER);
         }
     }
+
+
+    @Test
+    void testIntegration() {
+        // Fetch a quote
+        BikeQuantity quantity = new BikeQuantity(t1, 1);
+        ArrayList<BikeQuantity> quantityHolder = new ArrayList<BikeQuantity>();
+        quantityHolder.add(quantity);
+        Query query = new Query(quantityHolder, bookedRange, deliveryAddress);
+        ArrayList<Quote> quotes = system.getQuotes(query);
+
+        // Check that only necessary quotes are returned
+        assertEquals(quotes.size(), 1);
+
+        // Book first quote in list
+        Quote q = quotes.get(0);
+        Booking b = system.bookQuote(q, CollectionMethod.COLLECTION, deliveryAddress);
+        assertTrue(b.containsBike(b1));
+        assertEquals(b.getProvider(), p1);
+        assertEquals(b.getDateRange(), bookedRange);
+    }
 }
