@@ -12,7 +12,7 @@ class TestDateRange {
 
     @BeforeEach
     void setUp() throws Exception {
-        // Setup resources before each test
+        // Set up resources before each test
         this.dateRange1 = new DateRange(LocalDate.of(2019, 1, 7),
                 LocalDate.of(2019, 1, 10));
         this.dateRange2 = new DateRange(LocalDate.of(2019, 1, 5),
