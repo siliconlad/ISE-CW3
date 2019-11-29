@@ -4,8 +4,8 @@ import java.math.BigDecimal;
 import java.util.Objects;
 
 public class BikeType {
-    String name;
-    BigDecimal replacementValue;
+    private String name;
+    private BigDecimal replacementValue;
 
     public BikeType(String name, BigDecimal replacementValue) {
         this.name = name;
