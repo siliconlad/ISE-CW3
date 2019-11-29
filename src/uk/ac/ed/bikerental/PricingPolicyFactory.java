@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 
 public class PricingPolicyFactory {
     private MultidayPolicy pricingPolicyInstance;
-    public DefaultPricingPolicy defaultPolicyInstance;
+    private DefaultPricingPolicy defaultPolicyInstance;
 
     public PricingPolicyFactory() {
         defaultPolicyInstance = new DefaultPricingPolicy();
