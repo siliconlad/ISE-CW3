@@ -45,7 +45,7 @@ public class SystemTests {
         t3 = new BikeType("Unicycle", new BigDecimal(5));
         bikeTypes.addType(t3);
 
-        // Set up providers and a partnership between p1 and p2
+        // Set up providers 
         p1 = new Provider("The Bike Store", new Location("EH2 1GF", "123 Fake Street"), new BigDecimal(0.20));
         p1.setRentalPrice(t1, new BigDecimal(10));
         p1.setRentalPrice(t2, new BigDecimal(10));
@@ -62,6 +62,7 @@ public class SystemTests {
         p3.setRentalPrice(t2, new BigDecimal(10));
         providers.addProvider(p3);
 
+        // Set up partnership between p1 and p2 (for returnToProvider)
         p1.addPartner(p2);
         p2.addPartner(p1);
 
@@ -81,32 +82,37 @@ public class SystemTests {
 
     }
 
+    // Ensure that the singleton BookingList is reset for each test
     @BeforeEach
     void flushBookings() {
         bookings.clear();
+    }
+    
 
-        // Add "booked" bike to check that it is not returned by Quote fetching method
+
+    // Tests for use case 'Finding a quote'
+
+    @Test
+    void testFindQuoteBooked() {
+        // Add booked bike to check that it is not returned in testFindQuoteBooked()
         b4 = new Bike(t1);
         p1.addBikeToStock(b4);
         ArrayList<Bike> bikeHolder = new ArrayList<Bike>();
         bikeHolder.add(b4);
         Quote quoteHolder = new Quote(bookedRange, bikeHolder, p1);
         bookings.newBooking(quoteHolder, CollectionMethod.COLLECTION, deliveryAddress);
-    }
-    
 
-    @Test
-    void testFindQuoteBooked() {
-        // Set up Query
+        // Set up Query and fetch Quotes
         BikeQuantity quantity = new BikeQuantity(t1, 1);
         ArrayList<BikeQuantity> quantityHolder = new ArrayList<BikeQuantity>();
         quantityHolder.add(quantity);
         Query query = new Query(quantityHolder, bookedRange, deliveryAddress);
-
         ArrayList<Quote> quotes = system.getQuotes(query);
-        // Check that only necessary quotes are returned
+
+        // Check that only one quote (ideally the valid one) is returned
         assertEquals(quotes.size(), 1);
 
+        // Extract said quote from the list and check that it is accurate
         Quote q = quotes.get(0);
         assertTrue(q.getBikes().contains(b1));
         assertEquals(q.getProvider(), p1);
@@ -121,12 +127,11 @@ public class SystemTests {
 
     @Test
     void testFindQuoteFree() {
-        // Set up Query
+        // Set up Query and fetch quotes
         BikeQuantity quantity = new BikeQuantity(t1, 1);
         ArrayList<BikeQuantity> quantityHolder = new ArrayList<BikeQuantity>();
         quantityHolder.add(quantity);
         Query query = new Query(quantityHolder, freeRange, deliveryAddress);
-
         ArrayList<Quote> quotes = system.getQuotes(query);
         // Check that bikes 2 and 3
         for (Quote q: quotes) {
@@ -136,12 +141,16 @@ public class SystemTests {
     }
 
 
+    // Tests for use case 'Booking a quote'
+
     @Test
     void testBookQuoteCollection() {
+        // Create an example Quote for the System to book
         ArrayList<Bike> bikeHolder = new ArrayList<Bike>();
         bikeHolder.add(b1);
         Quote quoteHolder = new Quote(bookedRange, bikeHolder, p1);
 
+        // Book quote and check that the booking returned is accurate
         Booking b = system.bookQuote(quoteHolder, CollectionMethod.COLLECTION, deliveryAddress);
         assertTrue(b.containsBike(b1));
         assertEquals(b.getProvider(), p1);
@@ -160,10 +169,12 @@ public class SystemTests {
 
     @Test
     void testBookQuoteDelivery() {
+        // Create an example Quote for the System to book
         ArrayList<Bike> bikeHolder = new ArrayList<Bike>();
         bikeHolder.add(b1);
         Quote quoteHolder = new Quote(bookedRange, bikeHolder, p1);
 
+        // Book quote and check that the booking returned is accurate
         Booking b = system.bookQuote(quoteHolder, CollectionMethod.DELIVERY, deliveryAddress);
         assertTrue(b.containsBike(b1));
         assertEquals(b.getProvider(), p1);
@@ -180,8 +191,12 @@ public class SystemTests {
     }
 
 
+
+    // Tests for use case 'Returning bikes'
+
     @Test
     void testReturnBikeOriginal() {
+        // Book a Quote for the System to return
         ArrayList<Bike> bikeHolder = new ArrayList<Bike>();
         bikeHolder.add(b1);
         Quote quoteHolder = new Quote(bookedRange, bikeHolder, p1);
@@ -189,6 +204,7 @@ public class SystemTests {
         b.setStatus(BookingStatus.IN_USE);
         system.returnToProvider(b.getBookingNumber(), p1);
 
+        // Check statuses of Bookings and Bikes
         assertEquals(b.getBookingStatus(), BookingStatus.FULFILLED);
         for (Bike bike: b.getBikes()) {
             assertEquals(bike.getStatus(), BikeStatus.RETURNED);
@@ -197,6 +213,7 @@ public class SystemTests {
 
     @Test
     void testReturnBikeProvider() {
+        // Book a Quote for the System to return
         ArrayList<Bike> bikeHolder = new ArrayList<Bike>();
         bikeHolder.add(b1);
         Quote quoteHolder = new Quote(bookedRange, bikeHolder, p1);
@@ -204,6 +221,7 @@ public class SystemTests {
         b.setStatus(BookingStatus.IN_USE);
         system.returnToProvider(b.getBookingNumber(), p2);
 
+        // Check statuses of Bookings and Bikes
         assertEquals(b.getBookingStatus(), BookingStatus.WITH_PARTNER);
         for (Bike bike: b.getBikes()) {
             assertEquals(bike.getStatus(), BikeStatus.RETURNED_TO_PARTNER);
@@ -220,11 +238,22 @@ public class SystemTests {
         Query query = new Query(quantityHolder, bookedRange, deliveryAddress);
         ArrayList<Quote> quotes = system.getQuotes(query);
 
-        // Check that only necessary quotes are returned
+        // Check that the correct number of Quotes was returned
         assertEquals(quotes.size(), 1);
 
-        // Book first quote in list
+        // Extract the relevant Quote and test its accuracy
         Quote q = quotes.get(0);
+        assertTrue(q.getBikes().contains(b1));
+        assertEquals(q.getProvider(), p1);
+        assertEquals(q.getDateRange(), bookedRange);
+
+        BigDecimal actualDeposit = new BigDecimal(6.0);
+        assertEquals(q.getDeposit().stripTrailingZeros(), actualDeposit.stripTrailingZeros());
+
+        BigDecimal actualTotalPrice = new BigDecimal(40.0);
+        assertEquals(q.getTotalPrice().stripTrailingZeros(), actualTotalPrice.stripTrailingZeros());
+
+        // Book first quote in list, and check that the booking obtained is accurate
         Booking b = system.bookQuote(q, CollectionMethod.COLLECTION, deliveryAddress);
         assertTrue(b.containsBike(b1));
         assertEquals(b.getProvider(), p1);
