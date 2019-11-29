@@ -287,7 +287,7 @@ public class SystemTests {
 
     // Check that statuses are set correctly when Bike is returned to a partner of the original provider
     @Test
-    void testReturnBikeProvider() {
+    void testReturnBikePartner() {
         // Book a Quote for the System to return
         ArrayList<Bike> bikeHolder = new ArrayList<Bike>();
         bikeHolder.add(b1);
