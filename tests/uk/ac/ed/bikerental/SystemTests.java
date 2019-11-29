@@ -22,7 +22,7 @@ public class SystemTests {
 
     static BikeType t1, t2, t3;
     static Provider p1, p2, p3;
-    static Bike b1, b2, b3, b4, b5;
+    static Bike b1, b2, b3, b4;
 
     static DateRange freeRange, bookedRange;
     static Location deliveryAddress;
@@ -137,6 +137,7 @@ public class SystemTests {
         for (Quote q: quotes) {
             assertFalse(q.getBikes().contains(b2));
             assertFalse(q.getBikes().contains(b3));
+            assertEquals(q.getProvider(), p1);
         }
     }
 
