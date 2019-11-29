@@ -42,6 +42,10 @@ public final class BookingList {
         return booking;
     }
 
+    public void clear() {
+        this.bookings.clear();
+    }
+
     public Boolean contains(int number) {
         return this.bookings.containsKey(number);
     }
