@@ -114,7 +114,7 @@ public class SystemTests {
 
         // Extract said quote from the list and check that it is accurate
         Quote q = quotes.get(0);
-        assertEquals(1, bs.size());
+        assertEquals(1, q.getBikes().size());
         assertTrue(q.getBikes().contains(b1));
         assertEquals(q.getProvider(), p1);
         assertEquals(q.getDateRange(), bookedRange);
