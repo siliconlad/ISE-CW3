@@ -10,7 +10,7 @@ public final class System {
     private BookingList bookings;
     private DeliveryService delivery;
 
-    public System() {
+    private System() {
         this.providers = ProviderList.getInstance();
         this.bookings = BookingList.getInstance();
         this.delivery = DeliveryServiceFactory.getDeliveryService();
