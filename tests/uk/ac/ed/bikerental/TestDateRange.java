@@ -67,7 +67,4 @@ class TestDateRange {
     void testEqualsFalse() {
         assertNotEquals(this.dateRange1, this.dateRange2);
     }
-
-
-    // TODO: Possibly test hashCode()?
 }
